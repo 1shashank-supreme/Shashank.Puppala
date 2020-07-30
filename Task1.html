@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+<style>
+#Myplace{
+	  background-color: green;
+color:white;
+	}
+table {
+  border-collapse: collapse;
+  width:50%;
+}
+table, th, td {
+  border:2px solid black;
+}
+th{
+background-color: white;
+  color: black;
+  height: 30px;
+}
+th, td {
+  padding: 15px;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+	<div  id="formid" align="Center" >
+		<br>
+		<h1 align="center"> PinCode API</h1>
+		<br>
+		Pincode:<input type="text" name="pincode"  id="pincode">
+		<br><br>
+		
+		<button onclick="getPincode()" id="submitButton">Submit</button>
+		<br>
+		<br>
+</div>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+	<div align="center">
+		
+		<table align="center" id="pincodedetails">
+			<thead>
+				<tr>
+					
+					<th>Name</th>
+					<th>Branch Type</th>
+					<th>Delivery Status</th>
+					<th>Circle</th>
+					<th>District</th>
+					<th>Division</th>
+					<th>Region</th>
+					<th>Block</th>
+					<th>District</th>
+					<th>State</th>
+					<th>Country</th>
+					<th>Pincode</th>
+					
+				</tr>
+			</thead>
+			<tbody id="data">
+			</tbody>
+			
+		</table>
+		<br>
+		<br>
+		<br>
+	</div>
+
+</body>
+<script>
+	function getPincode(){
+	var p = document.getElementById('pincode').value;
+	if(p==null || p=="" ){
+		alert("Please Enter a Value");
+		return false;
+		}
+	if(isNaN(p)){
+		alert("PinCode should consists of only numbers");
+		return false;
+		}
+	if( p.length<6 || p.length>6){
+		alert("PinCode should be exactly 6 digits");
+		return false;
+	}
+
+	
+
+ var url = "https://api.postalpincode.in/pincode/"+p;
+
+console.log(url);
+
+// http request
+  var request = new XMLHttpRequest();
+ request.open("GET", url, true);
+ request.send();
+ request.onload = () =>{
+ 	console.log(request);
+ 	if( request.status ===200){
+ 		
+ 		if(JSON.parse(request.response).length>0){
+ 			var x="";
+ 		JSON.parse(request.response).forEach((pin)=>{
+
+		pin.PostOffice.forEach((eachPincode)=>{ 
+
+			if(eachPincode.Name == "Attapur"){
+			
+			console.log(eachPincode.Name+"Your area");
+			x+="<tr id='Myplace'>";
+			x+= "<td>"+	(eachPincode.Name).replace("(O)","") +"</td>";
+			x+= "<td>"+	eachPincode.BranchType + "</td>";
+			x+= "<td>"+	eachPincode.DeliveryStatus + "</td>";
+			x+= "<td>"+	eachPincode.Circle + "</td>";
+			x+= "<td>"+ eachPincode.District+ "</td>";
+			x+= "<td>"+	eachPincode.Division + "</td>";
+			x+= "<td>"+	eachPincode.Region + "</td>";
+			x+= "<td>"+	eachPincode.Block + "</td>";
+			x+= "<td>"+	eachPincode.District + "</td>";
+			x+= "<td>"+	eachPincode.State + "</td>";
+			x+= "<td>"+	eachPincode.Country + "</td>";
+			x+= "<td>"+	eachPincode.Pincode + "</td>";
+			x+= "</tr>";
+
+			}
+			if(eachPincode.Name != "Attapur"){
+			console.log(eachPincode.Name + "Not your area");	
+			x+="<tr>";
+			x+= "<td>"+	(eachPincode.Name).replace("(O)","") + "</td>";
+			x+= "<td>"+	eachPincode.BranchType + "</td>";
+			x+= "<td>"+	eachPincode.DeliveryStatus + "</td>";
+			x+= "<td>"+	eachPincode.Circle + "</td>";
+			x+= "<td>"+	eachPincode.District + "</td>";
+			x+= "<td>"+	eachPincode.Division + "</td>";
+			x+= "<td>"+	eachPincode.Region + "</td>";
+			x+= "<td>"+	eachPincode.Block + "</td>";
+			x+= "<td>"+	eachPincode.District + "</td>";
+			x+= "<td>"+	eachPincode.State + "</td>";
+			x+= "<td>"+	eachPincode.Country + "</td>";
+			x+= "<td>"+	eachPincode.Pincode + "</td>";
+			x+= "</tr>";
+			}
+
+			})
+ 	})
+ 			document.getElementById("data").innerHTML = x;
+ }
+}
+ else{
+ console.log('error ${request.Status} ${request.statusText');
+ }
+}
+}
+</script>
+</html>
+
