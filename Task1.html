@@ -1,12 +1,37 @@
 <!DOCTYPE html>
 <html>
-<head>
-	
+<head>	
 <style>
 #Myplace{
-	  background-color: green;
+background-color: green !important;
 color:white;
 	}
+#submitButton
+{
+  width: 10%;
+  font-weight:bold;
+  background-color: lightgrey;
+  color: black;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+#submitButton:hover {
+  background-color: green;
+  color:white;
+}
+#pincode {
+  width: 15%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid lightgrey;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
 table {
   border-collapse: collapse;
   width:50%;
@@ -15,9 +40,24 @@ table, th, td {
   border:2px solid black;
 }
 th{
-background-color: white;
+background-color: yellow;
+font-weight: bold;
   color: black;
   height: 30px;
+}
+#pincodedetails {
+  font-family: "Lucida Console", Courier, monospace;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+
+#pincodedetails tr:nth-child(odd){
+background-color: #f2f2f2;
+}
+
+#pincodedetails tr:hover {
+background-color:#dddddd;
 }
 th, td {
   padding: 15px;
@@ -26,25 +66,22 @@ th, td {
 </style>
 </head>
 <body>
-	<div  id="formid" align="Center" >
+	<div  id="formid" align="Center"> >
 		<br>
-		<h1 align="center"> PinCode API</h1>
+		<h1 align="center"><i>Search Pin Code</i></h1>
 		<br>
-		Pincode:<input type="text" name="pincode"  id="pincode">
-		<br><br>
-		
+		<p style="font-size:140%;">Enter the Pincode : </p></b><input type="text"  maxlength=6 name="pincode"  id="pincode">
+		<br>
 		<button onclick="getPincode()" id="submitButton">Submit</button>
 		<br>
 		<br>
 </div>
 </div>
-
-<br>
 <br>
 <br>
 <br>
 	<div align="center">
-		
+		<h2>Pincode Details</h2>
 		<table align="center" id="pincodedetails">
 			<thead>
 				<tr>
@@ -78,15 +115,15 @@ th, td {
 	function getPincode(){
 	var p = document.getElementById('pincode').value;
 	if(p==null || p=="" ){
-		alert("Please Enter a Value");
+		alert("Please Enter a Value as Pincode");
 		return false;
 		}
 	if(isNaN(p)){
-		alert("PinCode should consists of only numbers");
+		alert("PinCode should consists of only digits");
 		return false;
 		}
 	if( p.length<6 || p.length>6){
-		alert("PinCode should be exactly 6 digits");
+		alert("PinCode should be only 6 digits");
 		return false;
 	}
 
@@ -96,7 +133,6 @@ th, td {
 
 console.log(url);
 
-// http request
   var request = new XMLHttpRequest();
  request.open("GET", url, true);
  request.send();
@@ -118,7 +154,7 @@ console.log(url);
 			x+= "<td>"+	eachPincode.BranchType + "</td>";
 			x+= "<td>"+	eachPincode.DeliveryStatus + "</td>";
 			x+= "<td>"+	eachPincode.Circle + "</td>";
-			x+= "<td>"+ eachPincode.District+ "</td>";
+			x+= "<td>"+              eachPincode.District+ "</td>";
 			x+= "<td>"+	eachPincode.Division + "</td>";
 			x+= "<td>"+	eachPincode.Region + "</td>";
 			x+= "<td>"+	eachPincode.Block + "</td>";
