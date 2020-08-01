@@ -31,6 +31,9 @@ color:white;
   border-radius: 4px;
   box-sizing: border-box;
 }
+#pincode:hover {
+  background-color: #f3f3f3;
+}
 
 table {
   border-collapse: collapse;
@@ -65,7 +68,7 @@ th, td {
 }
 </style>
 </head>
-<body>
+<body style=" background-color: lightblue;">
 	<div  id="formid" align="Center"> 
 		<br>
 		<h1 align="center"><i>Search Pin Code</i></h1>
@@ -154,7 +157,7 @@ console.log(url);
 			x+= "<td>"+	eachPincode.BranchType + "</td>";
 			x+= "<td>"+	eachPincode.DeliveryStatus + "</td>";
 			x+= "<td>"+	eachPincode.Circle + "</td>";
-			x+= "<td>"+              eachPincode.District+ "</td>";
+			x+= "<td>"+     eachPincode.District+ "</td>";
 			x+= "<td>"+	eachPincode.Division + "</td>";
 			x+= "<td>"+	eachPincode.Region + "</td>";
 			x+= "<td>"+	eachPincode.Block + "</td>";
