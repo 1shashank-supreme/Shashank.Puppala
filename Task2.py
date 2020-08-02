@@ -1,12 +1,10 @@
-p=int(input())
-leads_list=[ ]
-for x in range(p):
-  leads_list.append(input())
+p_string=input("Enter the leads names")
+leads_list=p_string.split(",")
 def sorting_employees(employees_list):
     company_leads={ }
     number_of_employees={ }
     for y in employees_list:
-        company=y[y.index('@')+1:y.index('.')]
+        company=y[y.index('@')+1:]
         name=y[0:y.index('@')]
         if(company not in company_leads):
             company_leads[company]=[ ]
